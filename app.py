@@ -9,6 +9,10 @@ st.title("Database Query Chat Interface")
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
+if st.button("Clear Chat History"):
+    st.session_state.messages = []
+    st.rerun()
+
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
@@ -32,8 +36,4 @@ if prompt := st.chat_input("Ask a question about the database..."):
         "content": response
     })
     
-    st.rerun()
-
-if st.button("Clear Chat History"):
-    st.session_state.messages = []
     st.rerun()
