@@ -11,3 +11,4 @@ class QueryState(BaseModel):
     generated_sql: str = Field(default="", description="The SQL query generated from the user query")
     query_result: list[dict] = Field(default_factory=list, description="Results from executing the SQL query")
     natural_language_response: str = Field(default="", description="Final natural language response to the user")
+    conversation_history: list[dict] = Field(default_factory=list, description="Previous conversation exchanges for context")

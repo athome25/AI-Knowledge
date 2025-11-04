@@ -32,15 +32,18 @@ def create_db_query_workflow():
     return workflow.compile()
 
 
-def run_query(user_query: str, db_path: str = "data/chinook.db") -> str:
+def run_query(user_query: str, db_path: str = "data/chinook.db", conversation_history: list[dict] = None) -> str:
     workflow = create_db_query_workflow()
-    initial_state = QueryState(user_query=user_query, db_path=db_path)
-    
+    initial_state = QueryState(
+        user_query=user_query,
+        db_path=db_path,
+        conversation_history=conversation_history or []
+    )
+
     final_state = None
     for event in workflow.stream(initial_state):
         print(f"{event}\n")
         final_state = event
-    
-    # Extract the final state value
+
     node_name = list(final_state.keys())[0]
     return final_state[node_name]["natural_language_response"]
