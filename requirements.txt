@@ -1,0 +1,6 @@
+langchain
+langgraph
+langchain-anthropic
+dotenv
+pydantic
+streamlit
