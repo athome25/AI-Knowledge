@@ -30,7 +30,7 @@ def list_tables_node(state: QueryState) -> QueryState:
 def identify_relevant_tables_node(state: QueryState) -> QueryState:
     conversation_context = _format_conversation_history(state.conversation_history)
     prompt = IDENTIFY_RELEVANT_TABLES_PROMPT.format(
-        tables=", ".join(state.all_tables),
+        tables=state.all_tables,
         user_query=state.user_query,
         conversation_context=conversation_context
     )
@@ -56,7 +56,7 @@ def get_table_schemas_node(state: QueryState) -> QueryState:
 
 
 def generate_sql_node(state: QueryState) -> QueryState:
-    schemas_text = "\n".join(state.table_schemas.values())
+    schemas_text = state.table_schemas
     conversation_context = _format_conversation_history(state.conversation_history)
 
     prompt = GENERATE_SQL_PROMPT.format(
@@ -80,7 +80,7 @@ def execute_query_node(state: QueryState) -> QueryState:
 def generate_response_node(state: QueryState) -> QueryState:
     query_results_str = json.dumps(state.query_result, indent=2)
     conversation_context = _format_conversation_history(state.conversation_history)
-    schemas_text = "\n".join(state.table_schemas.values())
+    schemas_text = state.table_schemas
 
     prompt = NATURAL_LANGUAGE_RESPONSE_PROMPT.format(
         user_query=state.user_query,

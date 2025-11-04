@@ -39,6 +39,6 @@ Relevant tables and their schemas:
 Query results:
 {query_results}
 
-Provide a clear, concise natural language response that answers the user's query based on the results above.
+Provide a clear, concise natural language response that answers the user's query based on the results above. Don't use heading markdown.
 
-After that, show the SQL query that was used to get these results, prefixed by 'SQL Query:'. Do not include any other information, explanations, or formatting."""
+After that, show the SQL query that was used to get these results. Do not include any other information or explanation."""
