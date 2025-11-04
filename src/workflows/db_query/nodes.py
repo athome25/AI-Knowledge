@@ -80,11 +80,13 @@ def execute_query_node(state: QueryState) -> QueryState:
 def generate_response_node(state: QueryState) -> QueryState:
     query_results_str = json.dumps(state.query_result, indent=2)
     conversation_context = _format_conversation_history(state.conversation_history)
+    schemas_text = "\n".join(state.table_schemas.values())
 
     prompt = NATURAL_LANGUAGE_RESPONSE_PROMPT.format(
         user_query=state.user_query,
         query_results=query_results_str,
-        conversation_context=conversation_context
+        conversation_context=conversation_context,
+        schemas=schemas_text
     )
     
     response = llm.invoke(prompt)

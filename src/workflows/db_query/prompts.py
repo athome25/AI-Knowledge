@@ -33,6 +33,9 @@ NATURAL_LANGUAGE_RESPONSE_PROMPT = """You are a helpful assistant. Given a user'
 
 Original user query: {user_query}
 
+Relevant tables and their schemas:
+{schemas}
+
 Query results:
 {query_results}
 
